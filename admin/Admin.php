@@ -1,3 +1,12 @@
+<?php
+
+session_start();
+
+if(!isset($_SESSION['role']))
+  header("Location: ./login.php");
+
+?>
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
@@ -30,7 +39,7 @@
         <i class="fas fa-solid fa-trash"></i>
         <span>Delete</span>
       </a>
-      <a href="#">
+      <a href="./records.php">
         <i class="fas fa-regular fa-eye"></i>
         <span>Sitin Records</span>
       </a>
