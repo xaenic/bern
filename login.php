@@ -1,4 +1,9 @@
 <?php
+
+session_start();
+
+if(isset($_SESSION['id']))
+    header("location: home.php");
 // Assuming you have a connection to your MySQL database
 $servername = "localhost";
 $username = "root";
@@ -26,21 +31,19 @@ if (isset($_POST['login_submit'])) {
 
     if ($student_result->num_rows > 0) {
         $row = $student_result->fetch_assoc();
-
         // Verify password for student
         if (password_verify($password, $row['password'])) {
             // Redirect to the student dashboard
-
+            echo "bilat";   
             $_SESSION['id'] = $row['id'];
-            header("Location: home.php");
-            exit();
+            header("Location: ./home.php");
         } else {
             // Invalid password for student
             echo "Invalid email or password";
         }
     } else {
         // User not found
-        echo "Invalid email or password";
+        echo "Invalid email or passwordsdsd";
     }
 
     $stmt->close();
@@ -62,7 +65,7 @@ $conn->close();
         <div class="title">
             Login Form
         </div>
-        <form action="#" method="post">
+        <form action="" method="post">
             <div class="field">
                 <input type="text" name="email" required>
                 <label>Email Address</label>
