@@ -1,4 +1,9 @@
 <?php
+
+session_start();
+
+if(!isset($_SESSION['id']))
+    header("location: ./login.php");
 // Assuming you have a connection to your MySQL database
 $servername = "localhost";
 $username = "root";
@@ -12,6 +17,8 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
+
+
 
 $response = "";
 $id = ""; // Initialize $id variable

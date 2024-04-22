@@ -17,11 +17,6 @@ if (isset($_POST['login_submit'])) {
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-    // Check user credentials against the admin database
-    $stmt = $conn->prepare("SELECT * FROM admin_account WHERE email = ? LIMIT 1");
-    $stmt->bind_param("s", $email);
-    $stmt->execute();
-    $admin_result = $stmt->get_result();
 
     // Check user credentials against the student database
     $stmt = $conn->prepare("SELECT * FROM student_information WHERE email = ? LIMIT 1");
@@ -29,24 +24,14 @@ if (isset($_POST['login_submit'])) {
     $stmt->execute();
     $student_result = $stmt->get_result();
 
-    if ($admin_result->num_rows > 0) {
-        $row = $admin_result->fetch_assoc();
-
-        // Verify password for admin
-        if (password_verify($password, $row['password'])) {
-            // Redirect to the admin dashboard
-            header("Location: Admin.php");
-            exit();
-        } else {
-            // Invalid password for admin
-            echo "Invalid email or password";
-        }
-    } elseif ($student_result->num_rows > 0) {
+    if ($student_result->num_rows > 0) {
         $row = $student_result->fetch_assoc();
 
         // Verify password for student
         if (password_verify($password, $row['password'])) {
             // Redirect to the student dashboard
+
+            $_SESSION['id'] = $row['id'];
             header("Location: home.php");
             exit();
         } else {

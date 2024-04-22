@@ -65,7 +65,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         <i class="fas fa-regular fa-eye"></i>
         <span>Sitin Records</span>
       </a>
-      <a href="#">
+      <a href="./generate.php">
         <i class="fas fa-solid fa-book"></i>
         <span>Reports</span>
       </a>
